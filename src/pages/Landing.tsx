@@ -13,15 +13,12 @@ export interface Recipe {
 }
 
 function Landing(): JSX.Element {
-    // const navigate = useNavigate();
     const user = useUserAuth();
 
-    // TODO fetch example
     const recipesCollection = collection(db, "recipes");
     const [recipes, setRecipes] = useState<Recipe[]>();
 
     const loadData = useCallback(() => {
-        // TODO make sure this can't run
         getDocs(recipesCollection).then((rs) => {
             const docs = rs.docs;
             const rss: Recipe[] = docs.map((r) => {
@@ -40,7 +37,7 @@ function Landing(): JSX.Element {
 
     useEffect(() => {
         loadData();
-    });
+    }, []);
 
     const createRecipe = useCallback(
         (recipe: Recipe) => {
